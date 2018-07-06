@@ -1,22 +1,17 @@
 package com.example.admin.lesson9;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.Date;
 
 public class Activity3 extends AppCompatActivity {
 
-    EditText textViewName;
-    EditText textViewContent;
-    Button buttonOk;
-    DBManager dbManager;
+    private EditText textViewName;
+    private EditText textViewContent;
+    private Button buttonOk;
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +38,11 @@ public class Activity3 extends AppCompatActivity {
 
     private void createNotif(String name, String content) {
         dbManager = new DBManager(this);
-        dbManager.addNotif(name, content);
+        dbManager.addNotificatoin(null,name, content);
 
     }
 
     public void clickOk(View view) {
-
-
         createNotif(textViewName.getText().toString(), textViewContent.getText().toString());
         buttonOk.setText("Created");
 

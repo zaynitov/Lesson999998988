@@ -49,7 +49,7 @@ public class Activity2 extends Activity {
 
     public void onClickSave(View view) {
         dbManager = new DBManager(this);
-        dbManager.deleteNotifbyName(getIntent().getStringExtra("name"));
-        dbManager.addNotif(nameEdit.getText().toString(), contentEdit.getText().toString());
+        dbManager.deleteNotificationbyID(getIntent().getStringExtra("name"));
+        dbManager.addNotificatoin(null, nameEdit.getText().toString(), contentEdit.getText().toString());
     }
 }

@@ -1,8 +1,6 @@
 package com.example.admin.lesson9;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(MainActivity.this, Activity2.class);
 
-                        intent.putExtra("name", dbManager.getNotifbyName(viewById.getText().toString())[0]);
-                        intent.putExtra("date", dbManager.getNotifbyName(viewById.getText().toString())[1]);
-                        intent.putExtra("content", dbManager.getNotifbyName(viewById.getText().toString())[2]);
+
+                        intent.putExtra("name", dbManager.getNotificationbyName(viewById.getText().toString())[0]);
+                        intent.putExtra("date", dbManager.getNotificationbyName(viewById.getText().toString())[1]);
+                        intent.putExtra("content", dbManager.getNotificationbyName(viewById.getText().toString())[2]);
 
                         intent.putExtra("color",nameColour);
                         System.out.println(viewById.getText().toString());

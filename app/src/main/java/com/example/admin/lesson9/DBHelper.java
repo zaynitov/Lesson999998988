@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private void createEmptyTable(SQLiteDatabase database) {
-        database.execSQL("create table Notif(id integer primary key, name text, date Date, content text)");
+        database.execSQL("create table Notifications(id integer primary key, name text, date Date, content text)");
     }
 
 }
