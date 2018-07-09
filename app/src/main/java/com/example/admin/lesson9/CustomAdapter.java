@@ -12,11 +12,12 @@ import android.widget.TextView;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String[]> mData;
-     public boolean colour = false;
+    private List<String[]> mData;
+    private boolean colour = false;
+    public void changeColour() {
+        colour = true;
+    }
 
-     public void changeColour()
-     {colour=true;}
     public CustomAdapter(List<String[]> mData) {
         this.mData = mData;
     }
@@ -28,7 +29,6 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(view);
             mTextView = (TextView) view.findViewById(R.id.textview);
         }
-
     }
 
 
@@ -41,7 +41,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder viewHolder1 = (MyViewHolder) holder;
-        viewHolder1.mTextView.setText(mData.get(position)[0]);
+        viewHolder1.mTextView.setText(mData.get(position)[1]);
     }
 
     @Override

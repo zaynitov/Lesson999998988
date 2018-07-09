@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Activity3 extends AppCompatActivity {
+import com.example.admin.lesson9.model.DBManager;
 
+public class Activity3 extends AppCompatActivity {
     private EditText textViewName;
     private EditText textViewContent;
     private Button buttonOk;
@@ -24,14 +25,12 @@ public class Activity3 extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     private void init() {
         dbManager = new DBManager(this);
         textViewName = (EditText) findViewById(R.id.editTextName);
         textViewContent = (EditText) findViewById(R.id.editTextContent);
-
         buttonOk = (Button) findViewById(R.id.buttonOk);
     }
 
@@ -39,13 +38,10 @@ public class Activity3 extends AppCompatActivity {
     private void createNotif(String name, String content) {
         dbManager = new DBManager(this);
         dbManager.addNotificatoin(null,name, content);
-
     }
 
     public void clickOk(View view) {
         createNotif(textViewName.getText().toString(), textViewContent.getText().toString());
         buttonOk.setText("Created");
-
-
     }
 }

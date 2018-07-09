@@ -8,6 +8,13 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.example.admin.lesson9.dao.Dao;
+import com.example.admin.lesson9.dao.DaoImplementation;
+import com.example.admin.lesson9.helpers.Converter;
+import com.example.admin.lesson9.model.DBHelper;
+import com.example.admin.lesson9.model.DBManager;
 
 public class MyContentProvider extends ContentProvider {
     private static final String AUTHORITY = "com.example.admin.lesson9";
@@ -82,13 +89,46 @@ public class MyContentProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+
+        int uriType = sURIMatcger.match(uri);
+        int rowsdelete = 0;
+
+        switch (uriType) {
+            case NOTIFICATIONS:
+                rowsdelete = mDao.deleteNotificationS(selection, selectionArgs);
+                break;
+            case NOTIFICATION_ID:
+                String id = uri.getLastPathSegment();
+                Log.d("notif", "Out We are deleting" + id);
+                mDao.deleteNotificationById(Integer.valueOf(id));
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URL");
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rowsdelete;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        int uriType = sURIMatcger.match(uri);
+        int rowsUpdated = 0;
+        switch (uriType) {
+            case NOTIFICATIONS:
+                rowsUpdated = mDao.updateNotification(Converter.convertValuesToNotification(contentValues));
+                break;
+            case NOTIFICATION_ID:
+                String id = uri.getLastPathSegment();
+                mDao.updateNotificationById(Integer.valueOf(id), Converter.convertValuesToNotification(contentValues));
+                Log.d("notif", "Out We are updating" + id);
+                mDao.deleteNotificationById(Integer.valueOf(id));
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URL");
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rowsUpdated;
     }
 
 }
