@@ -18,7 +18,7 @@ import com.example.admin.lesson9.model.DBManager;
 
 public class MyContentProvider extends ContentProvider {
     private static final String AUTHORITY = "com.example.admin.lesson9";
-    private static final String NOTIFICATION_TABLE = "notifications";
+    private static final String NOTIFICATION_TABLE = "Notification";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NOTIFICATION_TABLE);
     public static final int NOTIFICATIONS = 1;
     public static final int NOTIFICATION_ID = 2;
@@ -58,9 +58,12 @@ public class MyContentProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URL");
         }
+        Log.d("donter", "SADSADSADSADSASASASAAS");
+        System.out.println("HOOOOOOOOOOOOOOOOOOOOOOOOOO");
 
-        Cursor cursor = queryBuilder.query(dbHelper.getReadableDatabase(), projection, selection, selectionArgs, null,
-                null, sortOrder);
+        Cursor cursor = queryBuilder.query(dbHelper.getReadableDatabase(), projection, selection, selectionArgs,
+                null, null, sortOrder);
+
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
@@ -116,13 +119,12 @@ public class MyContentProvider extends ContentProvider {
         int rowsUpdated = 0;
         switch (uriType) {
             case NOTIFICATIONS:
-                rowsUpdated = mDao.updateNotification(Converter.convertValuesToNotification(contentValues));
+                //    rowsUpdated = mDao.updateNotification(Converter.convertValuesToNotification(contentValues));
                 break;
             case NOTIFICATION_ID:
                 String id = uri.getLastPathSegment();
                 mDao.updateNotificationById(Integer.valueOf(id), Converter.convertValuesToNotification(contentValues));
                 Log.d("notif", "Out We are updating" + id);
-                mDao.deleteNotificationById(Integer.valueOf(id));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URL");

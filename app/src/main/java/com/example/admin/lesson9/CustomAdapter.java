@@ -13,11 +13,6 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<String[]> mData;
-    private boolean colour = false;
-    public void changeColour() {
-        colour = true;
-    }
-
     public CustomAdapter(List<String[]> mData) {
         this.mData = mData;
     }
